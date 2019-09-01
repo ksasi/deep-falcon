@@ -125,7 +125,8 @@ def parser(serialized_example):
         serialized_example,
         features={
             'image': tf.io.FixedLenFeature([], tf.string),
-            'label': tf.io.FixedLenFeature([], tf.int64), 
+            #'label': tf.io.FixedLenFeature([], tf.int64),
+            'label': tf.io.FixedLenFeature([], tf.float32),
         })
     image = tf.decode_raw(features['image'], tf.uint8)
     image.set_shape([DEPTH * HEIGHT * WIDTH])
@@ -134,7 +135,7 @@ def parser(serialized_example):
     image = tf.cast(
         tf.transpose(tf.reshape(image, [DEPTH, HEIGHT, WIDTH]), [1, 2, 0]),
         tf.float32)
-    #label = tf.cast(features['label'], tf.int64)
+    label = tf.cast(features['label'], tf.int64)
     #label = tf.cast(features['label'], tf.float32)
-    label = tf.one_hot(indices=features['label'], depth=num_classes)
+    label = tf.one_hot(indices=label, depth=num_classes)
     return image, label
