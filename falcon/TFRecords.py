@@ -136,5 +136,5 @@ def parser(serialized_example):
         tf.float32)
     #label = tf.cast(features['label'], tf.int64)
     #label = tf.cast(features['label'], tf.float32)
-    label = tf.one_hot(indices=label, depth=num_classes)
+    label = tf.one_hot(indices=features['label'], depth=num_classes)
     return image, label
