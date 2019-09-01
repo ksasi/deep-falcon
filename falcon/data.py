@@ -102,6 +102,7 @@ def gen_tfrecords(datasetname = "CIFAR10"):
     download_and_extract(data_dir)
     file_names = _get_file_names()
     input_dir = os.path.join(data_dir, CIFAR_LOCAL_FOLDER)
+  tfrecords_list = []
   for mode, files in file_names.items():
     input_files = [os.path.join(input_dir, f) for f in files]
     output_file = os.path.join(data_dir, mode + '.tfrecords')
@@ -111,7 +112,8 @@ def gen_tfrecords(datasetname = "CIFAR10"):
       pass
     # Convert to tf.train.Example and write the to TFRecords.
     convert_to_tfrecord(input_files, output_file)
-  return output_file
+    tfrecords_list.append(output_file)
+  return tfrecords_list
   
         
 def parser(serialized_example):
