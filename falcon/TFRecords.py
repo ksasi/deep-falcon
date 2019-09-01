@@ -22,7 +22,7 @@ import os
 import sys
 
 import tarfile
-from six.moves import CPickle as pickle
+from six.moves import cPickle as pickle
 from six.moves import xrange
 
 
