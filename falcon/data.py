@@ -118,31 +118,31 @@ def gen_tfrecords(datasetname = "CIFAR10"):
   
         
 def parser(serialized_example):
-    """Parses a single tf.Example into image and label tensors."""
-    # Dimensions of the images in the CIFAR-10 dataset.
-    # See http://www.cs.toronto.edu/~kriz/cifar.html for a description of the input format.
-    DEPTH = 3
-    HEIGHT = 32
-    WIDTH = 32
-    num_classes = 10
-    features = tf.io.parse_single_example(
-        serialized_example,
-        features={
-            'image': tf.io.FixedLenFeature([], tf.string),
-            #'label': tf.io.FixedLenFeature([], tf.int64),
-            'label': tf.io.FixedLenFeature([], tf.float32),
-        })
-    image = tf.decode_raw(features['image'], tf.uint8)
-    image.set_shape([DEPTH * HEIGHT * WIDTH])
+  """Parses a single tf.Example into image and label tensors."""
+  # Dimensions of the images in the CIFAR-10 dataset.
+  # See http://www.cs.toronto.edu/~kriz/cifar.html for a description of the input format.
+  DEPTH = 3
+  HEIGHT = 32
+  WIDTH = 32
+  num_classes = 10
+  features = tf.io.parse_single_example(
+    serialized_example,
+    features={
+      'image': tf.io.FixedLenFeature([], tf.string),
+      #'label': tf.io.FixedLenFeature([], tf.int64),
+      'label': tf.io.FixedLenFeature([], tf.float32),
+      })
+  image = tf.decode_raw(features['image'], tf.uint8)
+  image.set_shape([DEPTH * HEIGHT * WIDTH])
 
-    # Reshape from [depth * height * width] to [depth, height, width].
-    image = tf.cast(
-        tf.transpose(tf.reshape(image, [DEPTH, HEIGHT, WIDTH]), [1, 2, 0]),
-        tf.float32)
-    label = tf.cast(features['label'], tf.int64)
-    #label = tf.cast(features['label'], tf.float32)
-    label = tf.one_hot(indices=label, depth=num_classes)
-    return image, label
+  # Reshape from [depth * height * width] to [depth, height, width].
+  image = tf.cast(
+    tf.transpose(tf.reshape(image, [DEPTH, HEIGHT, WIDTH]), [1, 2, 0]),
+    tf.float32)
+  label = tf.cast(features['label'], tf.int64)
+  #label = tf.cast(features['label'], tf.float32)
+  label = tf.one_hot(indices=label, depth=num_classes)
+  return image, label
 
 
 def convert_to_tfrecords(X_data, Y_data):
