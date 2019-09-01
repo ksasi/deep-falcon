@@ -24,6 +24,7 @@ import sys
 import tarfile
 from six.moves import cPickle as pickle
 from six.moves import xrange
+from datetime import datetime
 
 
 
@@ -142,3 +143,27 @@ def parser(serialized_example):
     #label = tf.cast(features['label'], tf.float32)
     label = tf.one_hot(indices=label, depth=num_classes)
     return image, label
+
+
+def convert_to_tfrecords(X_data, Y_data):
+  """Converts a given dataset to TFRecords."""
+  output_file = output_file = os.path.join(data_dir, 'data' + str(datetime.utcnow()) +'.tfrecords')
+  print('Generating %s' % output_file)
+  with tf.python_io.TFRecordWriter(output_file) as record_writer:
+    data = X_data
+    labels = Y_data
+    num_entries_in_batch = len(labels)
+    for i in range(num_entries_in_batch):
+      example = tf.train.Example(features=tf.train.Features(
+        feature={
+          'image': _bytes_feature(data[i].tobytes()),
+          #'label': _int64_feature(labels[i])
+          'label': _float_feature(labels[i])
+          }))
+    record_writer.write(example.SerializeToString())
+  return output_file
+
+  
+  
+
+
