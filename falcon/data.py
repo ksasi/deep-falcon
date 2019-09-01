@@ -162,8 +162,3 @@ def convert_to_tfrecords(X_data, Y_data):
           }))
     record_writer.write(example.SerializeToString())
   return output_file
-
-  
-  
-
-
