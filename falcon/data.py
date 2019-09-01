@@ -111,6 +111,7 @@ def gen_tfrecords(datasetname = "CIFAR10"):
       pass
     # Convert to tf.train.Example and write the to TFRecords.
     convert_to_tfrecord(input_files, output_file)
+  return output_file
   
         
 def parser(serialized_example):
