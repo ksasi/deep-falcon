@@ -13,7 +13,7 @@ Original file is located at
 from __future__ import absolute_import, division, print_function, unicode_literals
 
 import tensorflow as tf
-from tf.keras.utils import get_file
+from tensorflow.keras.utils import get_file
 
 import numpy as np
 import IPython.display as display
