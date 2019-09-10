@@ -42,11 +42,11 @@ def download_and_extract(data_dir):
   path = get_file(
       data_dir,
       origin=CIFAR_DOWNLOAD_URL,
-      untar=False,
+      untar=True,
       file_hash=
       '6d958be074577803d12ecdefd02955f39262c83c16fe9348329d7fe0b5c001ce')
-  tarfile.open(os.path.join(data_dir, CIFAR_FILENAME),
-               'r:gz').extractall(data_dir)
+  #tarfile.open(os.path.join(data_dir, CIFAR_FILENAME),
+   #            'r:gz').extractall(data_dir)
   
   
   
