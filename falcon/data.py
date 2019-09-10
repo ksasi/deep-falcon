@@ -40,13 +40,13 @@ data_dir = './tfrecords_data'
 def download_and_extract(data_dir):
   # download CIFAR-10 if not already downloaded.
   path = get_file(
-      data_dir,
+      fname = CIFAR_FILENAME,
       origin=CIFAR_DOWNLOAD_URL,
-      untar=True,
-      file_hash=
-      '6d958be074577803d12ecdefd02955f39262c83c16fe9348329d7fe0b5c001ce')
-  #tarfile.open(os.path.join(data_dir, CIFAR_FILENAME),
-   #            'r:gz').extractall(data_dir)
+      untar=False,
+      file_hash='6d958be074577803d12ecdefd02955f39262c83c16fe9348329d7fe0b5c001ce'
+      cache_subdir = data_dir)
+  tarfile.open(os.path.join(data_dir, CIFAR_FILENAME),
+               'r:gz').extractall(data_dir)
   
   
   
