@@ -138,7 +138,7 @@ def parser(serialized_example):
       #'label': tf.io.FixedLenFeature([], tf.int64),
       'label': tf.io.FixedLenFeature([], tf.float32),
       })
-  image = tf.decode_raw(features['image'], tf.uint8)
+  image = tf.io.decode_raw(features['image'], tf.uint8)
   image.set_shape([DEPTH * HEIGHT * WIDTH])
 
   # Reshape from [depth * height * width] to [depth, height, width].
