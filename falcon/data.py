@@ -35,7 +35,7 @@ CIFAR_DOWNLOAD_URL = 'https://www.cs.toronto.edu/~kriz/' + CIFAR_FILENAME
 CIFAR_LOCAL_FOLDER = 'cifar-10-batches-py'
 
 
-data_dir = './tfrecords_data'
+data_dir = os.path.join(os.path.expanduser('~'), '.keras/tfrecords_data')
 
 
 def download_and_extract(data_dir):
@@ -44,8 +44,8 @@ def download_and_extract(data_dir):
       fname = CIFAR_FILENAME,
       origin=CIFAR_DOWNLOAD_URL,
       untar=False,
-      file_hash='6d958be074577803d12ecdefd02955f39262c83c16fe9348329d7fe0b5c001ce')
-  shutil.move('~/.keras/'+CIFAR_FILENAME ,data_dir+'/')
+      file_hash='6d958be074577803d12ecdefd02955f39262c83c16fe9348329d7fe0b5c001ce',
+      cache_subdir ='tfrecords_data')
   tarfile.open(os.path.join(data_dir, CIFAR_FILENAME),
                'r:gz').extractall(data_dir)
   
