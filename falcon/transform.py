@@ -68,7 +68,7 @@ def random_pad_crop(x: tf.Tensor, pad_size = 4) -> tf.Tensor:
   return x
 
 
-def transform(x: tf.Tensor, func_list: []) -> tf.Tensor:
+def augment(x: tf.Tensor, func_list: []) -> tf.Tensor:
   if not func_list:
     return x
   else:
